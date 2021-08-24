@@ -35,7 +35,7 @@ import socket
 import requests
 
 class Speedtesting:
-  def __init__(self, custom = False, source_url = None):
+  def __init__(self, custom = False):
     if not custom:
       self.speed_test = speedtest.Speedtest()
       self.speed_test.get_servers()
