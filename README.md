@@ -1,4 +1,5 @@
 
+
 # iOT-benchmarking
 IoT Benchmarking of La trobe Campus WiFi Speeds using Raspberry Pi 4
 
@@ -12,3 +13,10 @@ IoT Benchmarking of La trobe Campus WiFi Speeds using Raspberry Pi 4
 | Speedtesting Constructor |  |  custom | True will connect to latcs7. False will connect to speedtest.net servers |
 | test_upload_download| dictionary (network performance) |  export | True/False of exporting results to a results.json file |
 | push_to_thingspeak| string (response)  |  results_dictionary | dictionary of results returned from test_upload_download to be parsed and appended to thingspeak REST API|
+
+## Example (It is currently at the bottom of the script)
+
+
+    st = Speedtesting(custom = False)
+    result = st.test_upload_download(export = True)
+    st.push_to_thingspeak(result)
