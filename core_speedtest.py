@@ -31,8 +31,9 @@ Speedtesting class is designed to be scalable to do speedtest.net task and the c
 
 import speedtest
 import json
-import socket
 import requests
+import sys, time
+from socket import *
 
 class Speedtesting:
   def __init__(self, custom = False):
@@ -43,8 +44,30 @@ class Speedtesting:
       self.api_key = 'MSYZ8L99JXGS7CUW'
 
     else: #TODO to update else statement
-      # It is supposed to do a speed test on latcs7 server
-      raise NotImplementedError()
+    #TODO UPDATE IP ADDRESS HARDCODING
+      pass
+
+  def custom_upload_test(self):
+    ip = '127.0.0.1'
+    count = 1000
+    BUFSIZE = 1024000
+    port=8812
+    testdata = 'h' * (BUFSIZE-1)
+    time_initial = time.time()
+    st_socket = socket(AF_INET, SOCK_STREAM)
+    time_pre_connection = time.time()
+    st_socket.connect((ip, port))
+    time_post_connection = time.time()
+    time_pre_upload = time_post_connection
+    for i in range(count):
+        st_socket.send(bytearray(testdata,"utf-8"))
+    time_post_upload = time.time()
+    st_socket.shutdown(1)
+    total_time = round(time_post_upload-time_initial, 3)
+    print (f"Total time: {total_time}")
+    upload_speed = round((BUFSIZE*count*0.001*0.001) / (time_post_upload-time_pre_upload), 3)
+    print (f"Upload speed: {upload_speed} Kb/sec.")
+    return upload_speed, total_time
 
   #TODO to be implemented later
   def push_to_thingspeak(self, results_dictionary):
@@ -62,11 +85,3 @@ class Speedtesting:
       with open('results.json', 'w') as fp:
           json.dump(res, fp)
     return res
-
-"""**Speedtest.net Usage Example:**"""
-
-st = Speedtesting(custom = False)
-for i in range(1,1000):
-    print(f'Speed Test Iteration #{i}')
-    result = st.test_upload_download(export = True)
-    st.push_to_thingspeak(result)
