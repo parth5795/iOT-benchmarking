@@ -1,5 +1,5 @@
 """**Speedtest.net Usage Example:**"""
-import core_speedtest
+from core_speedtest import *
 st = Speedtesting(custom = False)
 for i in range(1,1000):
     print(f'Speed Test Iteration #{i}')
