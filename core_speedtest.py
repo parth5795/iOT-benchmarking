@@ -51,7 +51,10 @@ class Speedtesting:
     ip = '127.0.0.1'
     count = 1000
     BUFSIZE = 1024000
-    port=8812
+    port=8875
+    all_upload = []
+    avg_download = 0
+    no_of_iterations = 10
     testdata = 'h' * (BUFSIZE-1)
     time_initial = time.time()
     st_socket = socket(AF_INET, SOCK_STREAM)
@@ -59,15 +62,18 @@ class Speedtesting:
     st_socket.connect((ip, port))
     time_post_connection = time.time()
     time_pre_upload = time_post_connection
-    for i in range(count):
-        st_socket.send(bytearray(testdata,"utf-8"))
-    time_post_upload = time.time()
+    for _ in range(no_of_iterations):
+        for i in range(count):
+            st_socket.send(bytearray(testdata,"utf-8"))
+        time_post_upload = time.time()
+
+
+        upload_speed = round((BUFSIZE*count*0.001*0.001) / (time_post_upload-time_pre_upload), 3)
+        print (f"Upload speed: {upload_speed} Mb/sec.")
+        all_upload.append(upload_speed)
     st_socket.shutdown(1)
-    total_time = round(time_post_upload-time_initial, 3)
-    print (f"Total time: {total_time}")
-    upload_speed = round((BUFSIZE*count*0.001*0.001) / (time_post_upload-time_pre_upload), 3)
-    print (f"Upload speed: {upload_speed} Kb/sec.")
-    return upload_speed, total_time
+
+    return sum(all_upload)/len(all_upload) #returning average
 
   #TODO to be implemented later
   def push_to_thingspeak(self, results_dictionary):

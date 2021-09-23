@@ -8,7 +8,7 @@ import threading
 BUFSIZE = 1024000
 def server():
     st_socket = socket(AF_INET, SOCK_STREAM)
-    st_socket.bind(('', 8812))
+    st_socket.bind(('', 8875))
     st_socket.listen(1)
     print ('Server ready...')
     while 1:

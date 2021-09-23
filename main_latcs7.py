@@ -5,5 +5,5 @@ from core_speedtest import *
 st = Speedtesting(custom = True)
 for i in range(1,1000):
     print(f'Speed Test Iteration #{i}')
-    speed, upload_time = st.custom_upload_test()
-    print(speed, upload_time)
+    speed = st.custom_upload_test()
+    print(speed, 'Mbps')
