@@ -7,14 +7,16 @@ IoT Benchmarking of La trobe Campus WiFi Speeds using Raspberry Pi 4
 - `pip install -r requirements.txt`
 - `python ./speedtest.py`
 
-## Class methods
-|Method| return | parameters  | comments |
-|--|--|--|---|
-| Speedtesting Constructor |  |  custom | True will connect to latcs7. False will connect to speedtest.net servers |
-| test_upload_download| dictionary (network performance) |  export | True/False of exporting results to a results.json file |
-| push_to_thingspeak| string (response)  |  results_dictionary | dictionary of results returned from test_upload_download to be parsed and appended to thingspeak REST API|
 
 ## Usage
   - export LATCS7_PASSWORD=MY_PASS_WORD
   - export DEVICE_ID=1
   - python3 start.py
+
+#Example
+
+      st = Speedtesting()
+	    while 1:
+	      speed = st.test_all()
+	      print(speed, 'Mbps')
+	      time.sleep(15) # every 15 seconds
