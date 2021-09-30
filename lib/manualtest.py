@@ -5,6 +5,7 @@ class ManualTest:
         self._download_speed_list = []
         self._upload_speed_list = []
         self.latcs7_pass = os.environ['LATCS7_PASSWORD']
+        self.latcs7_username = os.environ['LATCS7_USERNAME']
 
 
     def download_once(self, filesize):
@@ -32,7 +33,7 @@ class ManualTest:
         host = "latcs7.cs.latrobe.edu.au"
         port = 22
         password = self.latcs7_pass
-        username = "20163715"
+        username = self.latcs7_username
 
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())

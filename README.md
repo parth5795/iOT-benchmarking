@@ -10,6 +10,7 @@ IoT Benchmarking of La trobe Campus WiFi Speeds using Raspberry Pi 4
 
 ## Usage
 ### Manual
+  - export LATCS7_USERNAME=MY_LATCS7_USERNAME
   - export LATCS7_PASSWORD=MY_PASS_WORD
   - export DEVICE_ID=1
   - python3 start.py
