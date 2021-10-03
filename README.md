@@ -22,6 +22,5 @@ IoT Benchmarking of La trobe Campus WiFi Speeds using Raspberry Pi 4
 
       st = Speedtesting()
 	    while 1:
-  	     responses = st.test_all()
-  	     print(responses)
+  	     st.test_all()
   	     time.sleep(15) # every 15 seconds
