@@ -1,3 +1,4 @@
 speedtest-cli
 paramiko
 requests
+ping3

@@ -46,10 +46,7 @@ class Speedtesting:
   def push_to_thingspeak(self, results_dictionary, custom = False):
     _json = json.dumps(results_dictionary, indent = 4)
     locations = {True:"Latcs7", False:"Speedtest.net"}
-    print(f"pushing data from {locations[custom]}")
-    print(f"data: {results_dictionary}")
     url_str = f"https://api.thingspeak.com/update?api_key={self.api_key}&field1={results_dictionary['upload']}&field2={results_dictionary['download']}&field3={self.device_id}&field4={locations[custom]}"
-    print(url_str)
     response = requests.get(url_str)
     return response
 
@@ -57,22 +54,38 @@ class Speedtesting:
     self.speed_test.download()
     self.speed_test.upload()
     res = self.speed_test.results.dict()
-    res["upload"] = res["upload"]*0.001*0.001
-    res["download"] = res["download"]*0.001*0.001
+    ret = {}
+    ret["upload"] = res["upload"]*0.001*0.001
+    ret["download"] = res["download"]*0.001*0.001
+    ret["ping"] = res["ping"]
+
     if export:
       with open('results.json', 'w') as fp:
-          json.dump(res, fp)
-    return res
+          json.dump(ret, fp)
+    return ret
 
   def test_latcs7(self):
+      ping = self.latcs7_test.ping()
       download = self.latcs7_test.download(filesize = 5)
       upload = self.latcs7_test.upload(filesize = 5)
       #TODO add ping
-      results = {"download": download, "upload":upload }
+      results = {"download": download, "upload":upload, "ping": ping }
       return results
+  def decode_dictionary(self,dict, debug=False):
+      decoded = f"ping: {dict['ping']}, download: {dict['download']}, upload: {dict['upload']}"
+      if print:
+          print(decoded)
+      return decoded
+
   def test_all(self):
+      print("Checking Speedtest.net...")
       st_result = self.test_speedtest_net()
+      self.decode_dictionary(st_result, debug = True)
+      print("Pushing to Thingspeak...")
       response1 = self.push_to_thingspeak(st_result)
+      print("Checking Latcs7 server...")
       lc_result = self.test_latcs7()
+      self.decode_dictionary(lc_result, debug = True)
+      print("Pushing to Thingspeak...")
       response2 = self.push_to_thingspeak(lc_result, custom = True)
-      return response1,response2
+      

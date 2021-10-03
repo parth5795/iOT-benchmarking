@@ -1,16 +1,25 @@
 import requests,time,paramiko,os
-
+from ping3 import ping, verbose_ping
 class ManualTest:
     def __init__(self):
         self._download_speed_list = []
         self._upload_speed_list = []
+        self._ping_list = []
         self.latcs7_pass = os.environ['LATCS7_PASSWORD']
         self.latcs7_username = os.environ['LATCS7_USERNAME']
+        self.server = 'latcs7.cs.latrobe.edu.au'
 
-
+    def ping_once(self, packet_size = 256):
+        result = ping(self.server, size = packet_size)
+        return round(result,5)
+    def ping(self, N = 10):
+        for i in range(N):
+            self._ping_list.append(self.ping_once())
+        avg = sum(self._ping_list)/len(self._ping_list)
+        return avg
     def download_once(self, filesize):
-        MB_SIZE = 1024000
-        url = f"http://homepage.cs.latrobe.edu.au/20163715/{filesize}MB.txt"
+        url = f"http://{self.server}/20163715/{filesize}MB.txt"
+        MB_SIZE = 1024*1024
         time_pre_connection = time.time()
         r = requests.get(url)
         time_post_connection = time.time()
@@ -29,7 +38,7 @@ class ManualTest:
         avg = sum(self._upload_speed_list)/len(self._upload_speed_list)
         return avg
     def upload_once(self, filesize = 5):
-        MB_SIZE = 1024000
+        MB_SIZE = 1024*1024
         host = "latcs7.cs.latrobe.edu.au"
         port = 22
         password = self.latcs7_pass

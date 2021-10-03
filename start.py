@@ -12,6 +12,5 @@ if args.sleep_minutes:
 
 st = Speedtesting()
 while 1:
-    responses = st.test_all()
-    print(responses)
+    st.test_all()
     time.sleep(sleep_inteval) # 15 seconds
