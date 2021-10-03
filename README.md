@@ -11,7 +11,8 @@ IoT Benchmarking of La trobe Campus WiFi Speeds using Raspberry Pi 4
   - `export LATCS7_USERNAME=MY_LATCS7_USERNAME`
   - `export LATCS7_PASSWORD=MY_PASS_WORD`
   - `export DEVICE_ID=1`
-  - `python3 start.py`
+  - `python3 start.py --sleep_minutes 15`
+    - --sleep_minutes is optional
 ### docker
   - update Dockerfile with LATCS7_PASSWORD, LATCS7_USERNAME and DEVICE_ID values
   - `docker build . -t speedtester`
