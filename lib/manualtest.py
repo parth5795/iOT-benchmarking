@@ -5,11 +5,12 @@ class ManualTest:
         self._download_speed_list = []
         self._upload_speed_list = []
         self._ping_list = []
-        self.latcs7_pass = os.environ['LATCS7_PASSWORD']
-        self.latcs7_username = os.environ['LATCS7_USERNAME']
-        self.server = 'latcs7.cs.latrobe.edu.au'
+        if 'LATCS7_USERNAME' in os.environ and 'LATCS7_PASSWORD' in os.environ:
+            self.latcs7_pass = os.environ['LATCS7_PASSWORD']
+            self.latcs7_username = os.environ['LATCS7_USERNAME']
+            self.server = 'latcs7.cs.latrobe.edu.au'
 
-    def ping_once(self, packet_size = 256):
+    def ping_once(self, packet_size = 56):
         result = ping(self.server, size = packet_size)
         return round(result,5)
     def ping(self, N = 10):

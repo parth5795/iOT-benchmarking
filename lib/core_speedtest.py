@@ -84,8 +84,10 @@ class Speedtesting:
       print("Pushing to Thingspeak...")
       response1 = self.push_to_thingspeak(st_result)
       print("Checking Latcs7 server...")
+      if 'LATCS7_USERNAME' not in os.environ or 'LATCS7_PASSWORD' not in os.environ:
+          print("Not latcs7 credentials found in env variables")
+          return
       lc_result = self.test_latcs7()
       self.decode_dictionary(lc_result, debug = True)
       print("Pushing to Thingspeak...")
       response2 = self.push_to_thingspeak(lc_result, custom = True)
-      
