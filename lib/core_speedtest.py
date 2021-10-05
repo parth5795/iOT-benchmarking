@@ -29,7 +29,7 @@ from .manualtest import ManualTest
 import json
 import requests
 import sys, time, os
-
+import subprocess
 
 class Speedtesting:
   def __init__(self):
@@ -38,10 +38,25 @@ class Speedtesting:
       self.speed_test.get_best_server()
       self.api_key = 'MSYZ8L99JXGS7CUW'
       self.latcs7_test = ManualTest()
-      self.device_id = os.environ['DEVICE_ID']
+      self.device_id = self.get_device_id()
+      print(f"DEVICE_ID {self.device_id}")
 
 
 
+# will only work on Raspberry pi
+  def get_device_id(self):
+      # Extract serial from cpuinfo file
+      cpuserial = "0000000000000000"
+      try:
+        f = open('/proc/cpuinfo','r')
+        for line in f:
+          if line[0:6]=='Serial':
+            cpuserial = line[10:26]
+        f.close()
+      except:
+        cpuserial = "ERROR000000000"
+
+      return cpuserial
   #TODO to be implemented later
   def push_to_thingspeak(self, results_dictionary, custom = False):
     _json = json.dumps(results_dictionary, indent = 4)
