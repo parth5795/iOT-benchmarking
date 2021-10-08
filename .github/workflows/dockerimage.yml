@@ -33,5 +33,5 @@ jobs:
         run: |
           echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
           # docker build . --file Dockerfile --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:{{$GITHUB_SHA  }}
-           docker buildx build --platform linux/arm/v7 --tag ${{ steps.prepare.outputs.docker_image }}:latest --file ./Dockerfile --output type=image,push=true .
-           docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:latest
+           docker buildx build --platform linux/arm/v7 --tag ${{ steps.prepare.outputs.docker_image }}:$GITHUB_SHA --file ./Dockerfile --output type=image,push=true .
+           docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
