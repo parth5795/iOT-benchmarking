@@ -4,7 +4,6 @@ FROM arm32v7/python:3.8.12-slim-buster
 WORKDIR /usr/src/app
 COPY . .
 ENV DEBIAN_FRONTEND noninteractive
-RUN deb http://archive.ubuntu.com/ubuntu vivid main restricted universe
 RUN apt-get update && \
     apt-get -y install gcc mono-mcs && \
     rm -rf /var/lib/apt/lists/* && \
