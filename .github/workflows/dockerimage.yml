@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Set up Docker Buildx
         uses: crazy-max/ghaction-docker-buildx@v1
-        with:        
+        with:
           version: latest
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -33,5 +33,5 @@ jobs:
         run: |
           echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
           # docker build . --file Dockerfile --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
-           docker buildx build --platform ${{ steps.prepare.outputs.docker_platform }} --tag ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }} --file ./Dockerfile --output type=image,push=true .
+           docker buildx build --platform linux/arm/v7 --tag ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }} --file ./Dockerfile --output type=image,push=true .
           docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
