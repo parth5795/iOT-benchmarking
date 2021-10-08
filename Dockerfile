@@ -7,6 +7,6 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
     apt-get -y install gcc mono-mcs && \
     rm -rf /var/lib/apt/lists/*
-RUN apt-get install libffi-dev openssl-dev python3-dev
+RUN apt-get install libffi-dev && apt-get install libffi-devopenssl-dev && apt-get install python3-dev
 RUN pip3 install -r requirements.txt
 CMD ["python3", "start.py", "--sleep_time","30"]
