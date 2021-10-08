@@ -2,7 +2,7 @@ name: Push latest docker Image to Docker Hub
 
 on:
   push:
-    branches: [ main ]
+    branches: [ arm32v7 ]
 
 jobs:
   build:
