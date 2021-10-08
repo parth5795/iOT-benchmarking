@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM arm32v7/python:3.8.12-slim-buster
+FROM arm32v7/python:3.8.12-alpine
 #FROM python:3.8.8
 WORKDIR /usr/src/app
 COPY . .
