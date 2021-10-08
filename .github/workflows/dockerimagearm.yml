@@ -6,7 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     env:
-
       DOCKER_IMAGE: {{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}
       DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_REPOSITORY }}
