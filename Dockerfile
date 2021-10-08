@@ -4,5 +4,8 @@ FROM arm32v7/python:3.8.12-slim-buster
 WORKDIR /usr/src/app
 COPY . .
 RUN pip3 install -r requirements.txt
-RUN apt-get -y install gcc
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update && \
+    apt-get -y install gcc mono-mcs && \
+    rm -rf /var/lib/apt/lists/*
 CMD ["python3", "start.py", "--sleep_time","30"]
