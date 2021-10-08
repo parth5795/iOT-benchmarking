@@ -1,4 +1,4 @@
-pythondockername: Docker Image CI
+name: Push latest docker Image to Docker Hub
 
 on:
   push:
