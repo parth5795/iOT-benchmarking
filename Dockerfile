@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM arm32v7/ubuntu:20.04
+FROM balenalib/raspberry-pi-python
 WORKDIR /usr/src/app
 COPY . .
 RUN apt-get update -y
