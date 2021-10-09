@@ -1,4 +1,7 @@
-import requests,time,paramiko,os
+import requests,time,os
+from subprocess import call
+
+
 from ping3 import ping, verbose_ping
 class ManualTest:
     def __init__(self):
@@ -24,7 +27,6 @@ class ManualTest:
         time_pre_connection = time.time()
         r = requests.get(url)
         time_post_connection = time.time()
-
         download_speed = round((MB_SIZE*filesize*0.001*0.001) / (time_post_connection-time_pre_connection), 3)
         return download_speed
 
@@ -44,20 +46,24 @@ class ManualTest:
         port = 22
         password = self.latcs7_pass
         username = self.latcs7_username
-
-        ssh = paramiko.SSHClient()
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(host, port, username, password)
-
-        sftp = ssh.open_sftp()
+        #
+        # ssh = paramiko.SSHClient()
+        # ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        # ssh.connect(host, port, username, password)
+        #
+        # sftp = ssh.open_sftp()
 
         path = "/home/mcswk/20163715/public_html/uploads/5MB.txt"
-        localpath = os.getcwd()+"/5MB.txt"
+        localpath = os.getcwd()+"/5_test.txt"
         time_pre_connection = time.time()
-        sftp.put(localpath, path)
+        # sftp.put(localpath, path)
+        #option 2
+        import pexpect
+        pexpect.spawn(f"curl --insecure --user {self.latcs7_username}:{self.latcs7_pass} -T \"{localpath}\" sftp://{host}{path}")
+        
         time_post_connection = time.time()
-
-        sftp.close()
-        ssh.close()
+        #
+        # sftp.close()
+        # ssh.close()
         upload_speed = round((MB_SIZE*filesize*0.001*0.001) / (time_post_connection-time_pre_connection), 3)
         return upload_speed
