@@ -7,5 +7,7 @@ RUN apt-get -y install wget
 RUN wget http://ftp.us.debian.org/debian/pool/main/libs/libseccomp/libseccomp2_2.5.1-1_armhf.deb
 RUN dpkg -i libseccomp2_2.5.1-1_armhf.deb
 RUN apt-get -y install python3-pip
+RUN apt-get install ca-certificates -y && \
+RUN apt-get clean
 RUN pip3 install -r requirements.txt
 CMD ["python3", "start.py"]
