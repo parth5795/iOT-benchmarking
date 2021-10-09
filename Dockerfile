@@ -8,4 +8,4 @@ RUN wget http://ftp.us.debian.org/debian/pool/main/libs/libseccomp/libseccomp2_2
 RUN dpkg -i libseccomp2_2.5.1-1_armhf.deb
 RUN apt-get -y install python3-pip
 RUN pip3 install -r requirements.txt
-CMD ["python3", "start.py", "--sleep_time","30"]
+CMD ["python3", "start.py"]
