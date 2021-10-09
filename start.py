@@ -1,6 +1,6 @@
 from lib.core_speedtest import *
 import argparse
-
+import time
 parser = argparse.ArgumentParser(description='iotApp')
 parser.add_argument('--sleep_minutes', required=False, help='Interval of speedtesting in minutes')
 args = parser.parse_args()
