@@ -10,8 +10,9 @@ RUN wget http://ftp.us.debian.org/debian/pool/main/libs/libseccomp/libseccomp2_2
 RUN dpkg -i libseccomp2_2.5.1-1_armhf.deb
 RUN apt-get -y install build-essential libssl-dev libffi-dev python3-pip python3-dev
 # RUN apt-get clean
-# ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 RUN pip3 install -r requirements.txt
 CMD ["python3", "start.py"]
 
-# sudo docker run --privileged -v /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt -it sudipta20449667/pythondocker:latest
+# docker run --privileged -v /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt -it sudipta20449667/pythondocker:latest
+# docker run --privileged -it sudipta20449667/pythondocker:latest
