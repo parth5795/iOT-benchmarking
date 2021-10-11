@@ -14,5 +14,4 @@ ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 RUN pip3 install -r requirements.txt
 CMD ["python3", "start.py"]
 
-# docker run --privileged -v /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt -it sudipta20449667/pythondocker:latest
 # docker run --privileged -it sudipta20449667/pythondocker:latest
