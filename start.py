@@ -12,6 +12,10 @@ if args.sleep_minutes:
 
 st = Speedtesting()
 while 1:
-    st.test_all()
+    try:
+        st.test_all()
+    except:
+        print("Some error is happening. Are you sure you are in the right network?")
+
     print(f"sleeping for {int(sleep_inteval/MINUTE)} minutes")
     time.sleep(sleep_inteval) # 15 seconds
