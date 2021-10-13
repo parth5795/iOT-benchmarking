@@ -9,7 +9,9 @@ MINUTE = 60
 sleep_inteval = 15 * MINUTE
 if args.sleep_minutes:
     sleep_inteval = int(args.sleep_minutes)  * MINUTE
-
+file = open('5MB.speedtest', 'wb')
+file.write(b"h"*(1024*1024*5))
+file.close()
 st = Speedtesting()
 while 1:
     try:
