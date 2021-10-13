@@ -12,8 +12,10 @@ if args.sleep_minutes:
 file = open('5MB.speedtest', 'wb')
 file.write(b"h"*(1024*1024*5))
 file.close()
-st = Speedtesting()
 while 1:
+    st = None
+    st = Speedtesting()
+
     try:
         st.test_all()
     except:

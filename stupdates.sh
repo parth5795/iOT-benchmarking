@@ -9,5 +9,5 @@ else
     echo "A newer version exits rerunning"
     docker stop cronspeed
     docker rm cronspeed
-    docker run --privileged -d --name cronspeed sudipta20449667/pythondocker:latest
+    docker run --privileged -d --name cronspeed --restart unless-stopped sudipta20449667/pythondocker:latest
 fi

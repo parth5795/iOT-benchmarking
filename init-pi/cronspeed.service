@@ -1,0 +1,13 @@
+[Unit]
+Description=Speedtest service
+Requires=docker.service
+After=docker.service
+
+[Service]
+#Restart=always
+Type=oneshot
+ExecStart=/usr/bin/docker start -a cronspeed
+RemainAfterExit=yes
+ExecStop=/usr/bin/docker stop -t 2 cronspeed
+[Install]
+WantedBy=multi-user.target
