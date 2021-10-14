@@ -56,6 +56,6 @@ class ManualTest:
         # print(cmd_str)
         pexpect.run(cmd_str)
         time_post_connection = time.time()
-        print(time_post_connection-time_pre_connection)
+        # print(time_post_connection-time_pre_connection)
         upload_speed = round((MB_SIZE*filesize*0.001*0.001) / (time_post_connection-time_pre_connection), 3)
         return upload_speed
