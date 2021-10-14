@@ -18,8 +18,9 @@ while 1:
 
     try:
         st.test_all()
-    except:
+    except  Exception as e:
         print("Some error is happening. Are you sure you are in the right network?")
+        print(str(e))
 
     print(f"sleeping for {int(sleep_inteval/MINUTE)} minutes")
     time.sleep(sleep_inteval) # 15 seconds
