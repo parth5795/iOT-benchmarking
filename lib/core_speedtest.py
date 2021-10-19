@@ -61,7 +61,8 @@ class Speedtesting:
   def push_to_thingspeak(self, results_dictionary, custom = False):
     _json = json.dumps(results_dictionary, indent = 4)
     locations = {True:"Latcs7", False:"Speedtest.net"}
-    url_str = f"https://api.thingspeak.com/update?api_key={self.api_key}&field1={results_dictionary['upload']}&field2={results_dictionary['download']}&field3={self.device_id}&field4={locations[custom]}"
+    url_str = f"https://api.thingspeak.com/update?api_key={self.api_key}&field1={results_dictionary['upload']}&field2={results_dictionary['download']}&field3={results_dictionary['ping']}&field4={self.device_id}&field5={locations[custom]}"
+    # print(url_str)
     response = requests.get(url_str)
     return response
 
