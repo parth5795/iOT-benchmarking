@@ -5,7 +5,7 @@
 IoT Benchmarking of La trobe Campus WiFi Speeds using Raspberry Pi 4
 
 ## Running docker container on Raspberry Pi
-  - `docker run --privileged -d --name cronspeed sudipta20449667/pythondocker:latest`
+  - `run --privileged -d --name cronspeed --restart unless-stopped sudipta20449667/pythondocker:latest`
   - `crontab -e`
     - Add `* * * * * /home/pi/cron.sh >> /home/pi/speedtests.log` add the very bottom to check for updates every minute
 
